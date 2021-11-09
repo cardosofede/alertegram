@@ -13,6 +13,7 @@ import logging
 
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+from dotenv import dotenv_values
 
 # Enable logging
 logging.basicConfig(
@@ -27,6 +28,7 @@ logger = logging.getLogger(__name__)
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
+    logging.info(update.message.chat_id)
     update.message.reply_markdown_v2(
         fr'Hi {user.mention_markdown_v2()}\!',
         reply_markup=ForceReply(selective=True),
@@ -45,8 +47,9 @@ def echo(update: Update, context: CallbackContext) -> None:
 
 def main() -> None:
     """Start the bot."""
+    token = dotenv_values('.env')['token']
     # Create the Updater and pass it your bot's token.
-    updater = Updater("TOKEN")
+    updater = Updater(token)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
