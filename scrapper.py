@@ -16,11 +16,15 @@ class WebScrapper:
         self._soup = soup
 
     def avaiable(self):
-        text = self._soup.find(id="cont_form").h1.center.text.strip()
-        str = 'En este momento la parroquia no cuenta con cupos para enfermos'
-        if str in text:
+        try:
+            text = self._soup.find(id="cont_form").h1.center.text.strip()
+            str = 'En este momento la parroquia no cuenta con cupos para enfermos'
+            if str in text:
+                avaiable = False
+            else:
+                avaiable = True
+        except:
             avaiable = False
-        else:
-            avaiable = True
+            text = 'No se encontro el texto'
         return avaiable, text    
     

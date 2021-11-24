@@ -28,12 +28,12 @@ logger = logging.getLogger(__name__)
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
-    logging.info(update.message.chat_id)
-    update.message.reply_markdown_v2(
-        fr'Hi {user.mention_markdown_v2()}\!',
-        reply_markup=ForceReply(selective=True),
-    )
-
+    # logging.info(update.message.chat_id)
+    # update.message.reply_markdown_v2(
+    #     fr'Hi {user.mention_markdown_v2()}\!',
+    #     reply_markup=ForceReply(selective=True),
+    # )
+    update.message.reply_text(f"Tu ID es: {update.message.chat_id}")
 
 def help_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
