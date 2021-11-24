@@ -9,13 +9,16 @@ if __name__ == '__main__':
     notifier = TelegramNotifier(token=token)
     chats_id = ['481175164']
     while True:
-        avaiable, text = a.avaiable()
-        if avaiable:
-            notifier.send_messages(
-                chats_id=chats_id,
-                message='Turno disponible')
-        else:
-            notifier.send_messages(
-                chats_id=chats_id,
-                message=text)
+        try:
+            avaiable, text = a.avaiable()
+            if avaiable:
+                notifier.send_messages(
+                    chats_id=chats_id,
+                    message='Turno disponible')
+            else:
+                notifier.send_messages(
+                    chats_id=chats_id,
+                    message=text)
+        except:
+            time.sleep(60)
         time.sleep(a._freq)
